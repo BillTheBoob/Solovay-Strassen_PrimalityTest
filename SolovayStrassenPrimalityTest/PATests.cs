@@ -15,8 +15,10 @@ namespace PrimalityAlgorithms.Tests
         [TestCase("1E", 1, "39", "0", 1)]
         [TestCase("22", -1, "2695", "0", 1)]
         [TestCase("2293465C7", 1, "98723415132473", "1", -1)]
-        [TestCase("81885C8050E26BD95368AB5CA79C38FC8F64DDCB48E1C4BE5C9A360A86B5FE5E", 1, "F1FB52AEDDC2396DB3493E3BE65AB871DD8D21B8653221797185EED3A7DAFD91", "1", -1 )]
-        public void TestJacobiSymbol(string hex1, int signA,string hex2, string expected, int signRes)
+        [TestCase("81885C8050E26BD95368AB5CA79C38FC8F64DDCB48E1C4BE5C9A360A86B5FE5E", 1, "F1FB52AEDDC2396DB3493E3BE65AB871DD8D21B8653221797185EED3A7DAFD91", "1", -1)]
+        [TestCase("39", 1, "1A", "1", -1)]
+        [TestCase("39", 1, "1E", "0", 1)]
+        public void TestJacobiSymbol(string hex1, int signA, string hex2, string expected, int signRes)
         {
             var a = new Number(hex1);
             var b = new Number(hex2);
@@ -27,16 +29,19 @@ namespace PrimalityAlgorithms.Tests
             Assert.AreEqual(signRes, result.sign);
         }
 
-        /*
+
         [Test]
         [Description("Verifies that Solovay–Strassen primality test works correctly.")]
-        [TestCase("133", 2000, true)]
+        [TestCase("133", 100, true)]
+        [TestCase("4D2", 100, false)]
+        [TestCase("13D755", 500, true)]
+        [TestCase("20B4E0C", 500, false)]
         public void TestSolovayStrassen(string hex, int k, bool expected)
         {
             var n = new Number(hex);
             PrimalityAlgorithm primality = new PrimalityAlgorithm();
             bool result = primality.SolovayStrassenPrimalityTest(n, k);
             Assert.AreEqual(expected, result);     
-        }*/
+        }
     }
 }

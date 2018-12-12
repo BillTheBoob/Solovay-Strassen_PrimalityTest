@@ -17,14 +17,14 @@ namespace LongModArithmetics.Tests
             var a = new Number(hex1);
             var b = new Number(hex2);
             ModCalculator modcalculator = new ModCalculator();
-            Assert.AreEqual(expected,modcalculator.Mod(a,b).ToString());
+            Assert.AreEqual(expected, modcalculator.Mod(a, b).ToString());
         }
 
 
         [Test]
         [Description("Verifies that GCD function works correctly.")]
         [TestCase("4D0FFA257CCEA11EBAB1F01E65A77392D01F1", "48C1B463F2782F60D0", "1")]
-        [TestCase("A","5","5")]
+        [TestCase("A", "5", "5")]
         [TestCase("1DF9E9A", "4", "2")]
         public void TestGCD(string hex1, string hex2, string expected)
         {
@@ -118,6 +118,7 @@ namespace LongModArithmetics.Tests
                   "ACDB497D01070220320A380B81241CBAB49A622EDA9296C85F95B9AF3348035AB6827023A1B6A2708C75A7EB0BDC84B0B62A6043BCF796633BA4A95F770AB8431C5A15E641D48EF7653C949D5DFEFF4019D4FCB2D62348E5A97CA3C346A0C3EC8BA4B42E4FED44C7D1F85A1BF0D2CF9E1E335FBE92B9C8FF01C8D4CB014EA9AF",
                   "10A7B2784DF6B061AB091DC97137011BACE1280BB722C213858014A5BE51D935AF962F8C87303F654F0698FDE92BE63590FCC9C0EB72206268B8EACB55C21DD19F2A80273DCD7FE170EB5E7723E26F931EEC552C5F761744A3B6F67ED557E204882DE8EB96E998EBE042CF9693DB7460DB35395F94329136A1341A66B8D962B9")]
         [TestCase("FFFFFFFFFFFFFFFFFFFFFFFFFF", "FFFFFFFFFFF", "FF", "0")]
+        [TestCase("41", "99", "133", "1")]
         public void TestLongModPowerBarrett(string hex1, string hex2, string hex3, string expected)
         {
             var a = new Number(hex1);

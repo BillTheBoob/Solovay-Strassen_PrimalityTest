@@ -92,39 +92,24 @@ namespace LongModularArithmetic
             return (a.array.Length << 4) - (16 - hex_letters_in_ulong);
         }
 
-        public string modify(int i, string result, string original)
-        {
-            int integer = Convert.ToInt32(result[i+1].ToString(), 16);
-            integer = rnd.Next(0, Convert.ToInt32(original[i+1].ToString(), 16) + 1);
-            StringBuilder str = new StringBuilder(result);
-            str[1] = Convert.ToChar(integer.ToString());
-            return str.ToString();
-        }
 
-        public string GenerateHexString(Number n)
+        public Number GenerateNumber(Number n)
         {
             string original = n.ToString();
             var digits = new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
             ulong firstHexLetter = 0ul;
             int LettersAmount = AmountOfHexLetters(n, out firstHexLetter);
             string result = "";
-            int num = (int)(firstHexLetter >> 0x3C);
-            result += digits[rnd.Next(0, num + 1)];
-
-            for(int j = 1; j < LettersAmount; j++)
+            for(int i = 0; i < LettersAmount; i++)
             {
                 result += digits[rnd.Next(0, 16)];
             }
 
-            for (int i = 0; i < result.Length - 1; i++)
-            {
-                if ((result[i] == original[i]) && result[i + 1] > original[i + 1])
-                {
-                    return modify(i, result, original);
-                }
-                return result;
-            }
-            return result;
+            var number = new Number(result);
+            if (calculator.LongCmp(number, two) == 0) { return calculator.LongAdd(number, one); }
+            while (calculator.LongCmp(number, n) == 1) { number = calculator.LongSub(number, n); }
+
+            return number;
         }
 
 
@@ -136,7 +121,7 @@ namespace LongModularArithmetic
 
             for (int i = 0; i < k; i++)
             {
-                a = new Number(GenerateHexString(t));
+                a = GenerateNumber(t);
                 x = JacobiSymbol(a, n);
                 if (calculator.LongCmp(x, zero) == 0) { return false; }
                 

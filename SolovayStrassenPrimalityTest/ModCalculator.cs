@@ -50,6 +50,9 @@ namespace LongModArithmetic
 
         public Number SteinGCD(Number z, Number x)
         {
+            zero = new Number(1);
+            one = new Number("1");
+
             int shift = 0;
             string tupo = z.ToString();
             Number u = new Number(z.ToString());
@@ -133,10 +136,10 @@ namespace LongModArithmetic
 
             word = b.array[b.array.Length - 1];
             for (; word != 0; word >>= 1)
-            {
+            { 
                 MultiplyAndTakeModule(ref word, ref result, ref a, ref module, ref bit_size, ref mu);
             }
-            return result;
+            return Mod(result, module);
         }
     }
 }
